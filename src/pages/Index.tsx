@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 // ------------------------------------------------------------
-=======
-// ------------------------------------------------------------ 
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
 // 🌊 FloodShield Frontend - Prediction Page
 // Author: Gaurav Kumbhare | Roll No: 3062
 // ------------------------------------------------------------
@@ -29,11 +25,6 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [formData, setFormData] = useState({
-<<<<<<< HEAD
-    rainfall: "", river_discharge: "", water_level: "",
-    temperature: "", humidity: "", soil_type: "",
-    elevation: "", latitude: "", longitude: "",
-=======
     rainfall: "",
     river_discharge: "",
     water_level: "",
@@ -44,25 +35,16 @@ const Index = () => {
     latitude: "",
     longitude: "",
     station: "Station1", // ✅ Default valid station
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
   });
+
+  const API_URL = "http://127.0.0.1:8000"; // ✅ Local FastAPI backend
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-<<<<<<< HEAD
-  // 🌐 Backend API base URL (change for deployment)
-  const API_URL = "http://127.0.0.1:8000"; // ✅ local FastAPI backend
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); setIsLoading(true);
-=======
-  const API_URL = "http://127.0.0.1:8000"; // ✅ Local backend
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
     try {
       const response = await axios.post(`${API_URL}/predict`, {
         rainfall: parseFloat(formData.rainfall),
@@ -74,14 +56,8 @@ const Index = () => {
         elevation: parseFloat(formData.elevation),
         latitude: parseFloat(formData.latitude),
         longitude: parseFloat(formData.longitude),
-<<<<<<< HEAD
-        station: "Station1", // ✅ required by backend
+        station: formData.station,
       });
-=======
-        station: formData.station, // ✅ dynamically selected
-      });
-
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
       const data = response.data;
       if (data.error) toast.error(data.error);
       else {
@@ -92,13 +68,9 @@ const Index = () => {
       }
     } catch (error) {
       toast.error("⚠️ Cannot connect to backend. Ensure FastAPI is running on port 8000.");
-<<<<<<< HEAD
-    } finally { setIsLoading(false); }
-=======
     } finally {
       setIsLoading(false);
     }
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
   };
 
   return (
@@ -109,9 +81,13 @@ const Index = () => {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Waves className="w-12 h-12 text-primary wave-animation" />
-              <h1 className="text-4xl md:text-5xl font-bold text-primary">Flood Risk Prediction System</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-primary">
+                Flood Risk Prediction System
+              </h1>
             </div>
-            <p className="text-muted-foreground text-lg">AI-powered Flood Detection by Gaurav Kumbhare</p>
+            <p className="text-muted-foreground text-lg">
+              AI-powered Flood Detection by Gaurav Kumbhare
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -128,10 +104,7 @@ const Index = () => {
                   <ParameterInfoModal />
                 </div>
               </CardHeader>
-<<<<<<< HEAD
-=======
 
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
@@ -165,10 +138,6 @@ const Index = () => {
                         />
                       </div>
                     ))}
-<<<<<<< HEAD
-                  </div>
-
-=======
 
                     {/* ✅ Station Dropdown */}
                     <div className="space-y-2">
@@ -187,7 +156,6 @@ const Index = () => {
                     </div>
                   </div>
 
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
                   <Button
                     type="submit"
                     disabled={isLoading}
@@ -208,7 +176,11 @@ const Index = () => {
 
                 {isLoading && <LoadingAnimation />}
                 {result && !isLoading && (
-                  <div className={`mt-6 rounded-xl overflow-hidden ${result.prediction === 1 ? "storm-bg" : "sunny-bg"}`}>
+                  <div
+                    className={`mt-6 rounded-xl overflow-hidden ${
+                      result.prediction === 1 ? "storm-bg" : "sunny-bg"
+                    }`}
+                  >
                     <Card className="border-0 bg-transparent shadow-[var(--shadow-result)]">
                       <CardContent className="pt-6 relative z-10">
                         <div className="flex items-start gap-4">
@@ -222,15 +194,13 @@ const Index = () => {
                             </div>
                           )}
                           <div className="flex-1">
-<<<<<<< HEAD
-                            <h3 className={`text-2xl font-bold mb-2 ${result.prediction === 1 ? "text-white" : "text-white drop-shadow-md"}`}>
-=======
                             <h3
                               className={`text-2xl font-bold mb-2 ${
-                                result.prediction === 1 ? "text-white" : "text-white drop-shadow-md"
+                                result.prediction === 1
+                                  ? "text-white"
+                                  : "text-white drop-shadow-md"
                               }`}
                             >
->>>>>>> e661c9226d1431b53bdf8eb9bc0d51204c157dec
                               {result.prediction === 1
                                 ? "🚨 FloodShield Alert: Flood Likely — Take Precautions!"
                                 : "✅ Safe Conditions Detected — No Flood Expected"}
@@ -254,7 +224,8 @@ const Index = () => {
               </CardHeader>
               <CardContent className="space-y-4 text-sm">
                 <p>
-                  The AI model predicts flood risk based on rainfall, discharge, soil type, and elevation.
+                  The AI model predicts flood risk based on rainfall, discharge, soil type, and
+                  elevation.
                   <br />Developed by <b>Gaurav Kumbhare (3062)</b>.
                 </p>
               </CardContent>
@@ -265,4 +236,5 @@ const Index = () => {
     </>
   );
 };
+
 export default Index;
